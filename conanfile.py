@@ -37,8 +37,8 @@ class tbbConan(ConanFile):
         self.copy("FindTbb.cmake", ".", ".")
 
         # Copying headers
-        self.copy(pattern="*.h", dst="include/tbb", src="include/tbb", keep_path=True)
-        self.copy(pattern="*.h", dst="include/serial", src="include/serial", keep_path=True)
+        self.copy(pattern="*.h", dst="include/tbb", src="%s/include/tbb" % self.unzipped_name, keep_path=True)
+        self.copy(pattern="*.h", dst="include/serial", src="%s/include/serial" % self.unzipped_name, keep_path=True)
 
         # Copying static and dynamic libs
         self.copy(pattern="*.a", dst="lib", src=".", keep_path=False)
@@ -46,7 +46,6 @@ class tbbConan(ConanFile):
         self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
         self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
         self.copy(pattern="*.dylib*", dst="lib", src=".", keep_path=False)      
-
 
 
     def package_info(self):
