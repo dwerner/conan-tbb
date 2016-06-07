@@ -7,7 +7,7 @@
 
 find_path(
 	TBB_INCLUDE_DIR
-	NAMES tbb.h
+	NAMES tbb/tbb.h
 	PATHS ${CONAN_INCLUDE_DIRS_TBB}
 	)
 
