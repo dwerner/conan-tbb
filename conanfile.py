@@ -12,9 +12,9 @@ class tbbConan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False]}
     default_options = "shared=True"
-    url="https://github.com/dwerner/conan-tbb"
-    license="https://github.com/google/googletest/blob/master/googletest/LICENSE"
-    exports="FindTbb.cmake"
+    url = "https://github.com/dwerner/conan-tbb"
+    license ="https://github.com/google/googletest/blob/master/googletest/LICENSE"
+    exports = "FindTbb.cmake", "change_dylib_names.sh"
     unzipped_name = "tbb44_20160526oss"
     zip_name = "%s_src.tgz" % unzipped_name
 
@@ -29,6 +29,10 @@ class tbbConan(ConanFile):
         self.run("%s && make" % cd_build)
 
     def package(self):
+
+        if self.settings.os == "Macos" and self.options.shared:
+            self.run("bash ./change_dylib_names.sh")
+
         # Copy findtbb script into project
         self.copy("FindTbb.cmake", ".", ".")
 
@@ -42,6 +46,8 @@ class tbbConan(ConanFile):
         self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
         self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
         self.copy(pattern="*.dylib*", dst="lib", src=".", keep_path=False)      
+
+
 
     def package_info(self):
         self.cpp_info.libs = ['tbb']
