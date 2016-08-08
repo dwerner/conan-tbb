@@ -16,7 +16,7 @@ class tbbConan(ConanFile):
     license ="https://github.com/google/googletest/blob/master/googletest/LICENSE"
     exports = "FindTbb.cmake", "change_dylib_names.sh"
     unzipped_name = "tbb44_20160526oss"
-    zip_name = "%s_src.tgz" % unzipped_name
+    zip_name = "%s_src_0.tgz" % unzipped_name
 
     def source(self):
         url = "https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/%s" % self.zip_name
